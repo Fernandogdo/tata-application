@@ -1,0 +1,28 @@
+.header-container {
+    text-align: center;
+    padding: 10px 20px;
+    background: #f5f5f5;
+    border-bottom: 2px solid #ddd;
+    position: fixed; /* 🔥 Fija el header en la parte superior */
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 60px; /* 🔥 Reducimos la altura para que no tape contenido */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon {
+    width: 25px;
+    height: auto;
+}

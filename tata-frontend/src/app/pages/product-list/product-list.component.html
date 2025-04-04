@@ -1,0 +1,99 @@
+<app-header></app-header> <!-- ✅ Header-->
+
+<div class="container">
+    <!-- Contenedor superior para Search y Botón Agregar -->
+    <div class="top-bar">
+        <input type="text" [(ngModel)]="searchText" (input)="filterProducts()" placeholder="Search..."
+            class="search-input" />
+        <button class="add-btn" [routerLink]="['/product-add']">Agregar</button>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Logo</th>
+                    <th>Nombre del producto <span class="info-icon">ℹ️</span></th>
+                    <th>Descripción <span class="info-icon">ℹ️</span></th>
+                    <th>Fecha de liberación <span class="info-icon">ℹ️</span></th>
+                    <th>Fecha de reestructuración <span class="info-icon">ℹ️</span></th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Skeleton Loader mientras carga -->
+                @if (loading) {
+                    @for (item of paginationOptions; track $index) {
+                        <tr>
+                            <td>
+                                <div class="skeleton skeleton-logo"></div>
+                            </td>
+                            <td>
+                                <div class="skeleton skeleton-text"></div>
+                            </td>
+                            <td>
+                                <div class="skeleton skeleton-text"></div>
+                            </td>
+                            <td>
+                                <div class="skeleton skeleton-text"></div>
+                            </td>
+                            <td>
+                                <div class="skeleton skeleton-text"></div>
+                            </td>
+                            <td>
+                                <div class="skeleton skeleton-button"></div>
+                            </td>
+                        </tr>
+                    }
+                }
+
+                <!-- Lista de productos cuando la carga ha finalizado -->
+                @if (!loading) {
+                <tr *ngFor="let product of filteredProducts | slice:0:limit">
+                    <td>
+                        <div class="logo-circle">
+                            <img [src]="product.logo" alt="Logo del producto" class="logo-img">
+                        </div>
+                    </td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.date_release }}</td>
+                    <td>{{ product.date_revision }}</td>
+                    <td class="action-cell">
+                        <div class="dropdown">
+                            <button class="dropdown-toggle" (click)="toggleDropdown(product.id)">
+                                &#8942; <!-- Icono de puntos verticales -->
+                            </button>
+                            @if (dropdownOpen === product.id) {
+                                <div class="dropdown-menu">
+                                    <button (click)="editProduct(product.id)">✏️</button>
+                                    <button (click)="openDeleteModal(product.id)">🗑️</button>
+                                </div>
+                            }
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pagination-container">
+        <span>{{ products.length }} Resultados</span>
+        <select [(ngModel)]="limit" class="select-limit">
+            @for (num of paginationOptions; track num) {
+                <option [value]="num">{{ num }}</option>
+            }
+        </select>
+    </div>
+</div>
+
+@if (showDeleteModal) {
+    <div class="modal-overlay">
+        <div class="modal">
+            <p>¿Estás seguro de eliminar el producto {{nameProductDelete}}?</p>
+            <button class="cancel-btn" (click)="showDeleteModal = false">Cancelar</button>
+            <button class="confirm-btn" (click)="confirmDelete()">Confirmar</button>
+        </div>
+    </div>
+}

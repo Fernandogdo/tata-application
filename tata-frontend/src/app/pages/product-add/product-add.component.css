@@ -1,0 +1,132 @@
+/* Contenedor del formulario */
+.form-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 130px;
+    box-shadow: 0 4px 8px rgba(0.5, 0.5, 0.5, 0.5);
+    text-align: center;
+}
+
+/* Título */
+.form-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Diseño de la cuadrícula del formulario */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    text-align: left;
+}
+
+/* Grupo de formulario */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Etiquetas */
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Inputs */
+input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Inputs deshabilitados */
+input:disabled {
+    background: #f0f0f0;
+    color: #888;
+}
+
+/* Mensajes de error */
+.error-message {
+    font-size: 12px;
+    color: red;
+    margin-top: 3px;
+}
+
+/* Botones */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Botón Reiniciar */
+.reset-btn {
+    background: #ddd;
+    color: #000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Botón Enviar */
+.submit-btn {
+    background: #ffd700;
+    color: #000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Botón deshabilitado */
+.submit-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+
+/* Skeleton Loader */
+.skeleton-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+}
+
+/* Skeleton de entrada de texto */
+.skeleton {
+    background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 5px;
+}
+
+/* Esqueleto de input */
+.skeleton-input {
+    height: 35px;
+    width: 100%;
+}
+
+/* Esqueleto de botón */
+.skeleton-button {
+    height: 40px;
+    width: 50%;
+    margin: auto;
+}
+
+/* Efecto de brillo */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}

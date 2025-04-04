@@ -1,0 +1,72 @@
+<app-header></app-header>
+
+<div class="form-container">
+    <h2 class="form-title">Formulario de Registro</h2>
+    <!-- Skeleton Loader mientras carga -->
+    @if (loading) {
+    <div class="skeleton-form">
+        @for (i of formSkeleton; track $index) {
+        <div class="skeleton skeleton-input"></div>
+        }
+        <div class="skeleton skeleton-button"></div>
+    </div>
+    }
+
+    @if (!loading) {
+    <form (ngSubmit)="saveProduct()" #productForm="ngForm">
+        <div class="form-grid">
+            <!-- ID -->
+            <div class="form-group">
+                <label for="id">ID</label>
+                <input type="text" [(ngModel)]="product.id" name="id" id="id" required minlength="3" maxlength="10"
+                    #id="ngModel" />
+                <span class="error-message" *ngIf="id.invalid && id.touched">ID no válido!</span>
+            </div>
+
+            <!-- Nombre -->
+            <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" [(ngModel)]="product.name" name="name" id="name" required minlength="5"
+                    maxlength="100" #name="ngModel" />
+                <span class="error-message" *ngIf="name.invalid && name.touched">Este campo es requerido!</span>
+            </div>
+
+            <!-- Descripción -->
+            <div class="form-group">
+                <label for="description">Descripción</label>
+                <input type="text" [(ngModel)]="product.description" name="description" id="description" required
+                    minlength="10" maxlength="200" #description="ngModel" />
+                <span class="error-message" *ngIf="description.invalid && description.touched">Este campo es
+                    requerido!</span>
+            </div>
+
+            <!-- Logo -->
+            <div class="form-group">
+                <label for="logo">Logo</label>
+                <input type="text" [(ngModel)]="product.logo" name="logo" id="logo" required #logo="ngModel" />
+                <span class="error-message" *ngIf="logo.invalid && logo.touched">Este campo es requerido!</span>
+            </div>
+
+            <!-- Fecha de Liberación -->
+            <div class="form-group">
+                <label for="date_release">Fecha Liberación</label>
+                <input type="date" [(ngModel)]="product.date_release" name="date_release" id="date_release"
+                    (change)="validateReleaseDate()" [min]="minDate" required />
+            </div>
+
+            <!-- Fecha de Revisión (Deshabilitada) -->
+            <div class="form-group">
+                <label for="date_revision">Fecha Revisión</label>
+                <input type="date" [(ngModel)]="product.date_revision" name="date_revision" id="date_revision"
+                    disabled />
+            </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="button-group">
+            <button type="button" class="reset-btn" (click)="resetForm()">Reiniciar</button>
+            <button type="submit" class="submit-btn" [disabled]="productForm.invalid">Enviar</button>
+        </div>
+    </form>
+    }
+</div>
